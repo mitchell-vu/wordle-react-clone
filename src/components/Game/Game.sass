@@ -1,0 +1,53 @@
+.game
+  width: 100%
+  max-width: var(--game-max-width)
+  margin: 0 auto
+  height: calc(100% - var(--header-height))
+  display: flex
+  flex-direction: column
+
+  &-board
+    display: grid
+    grid-template-rows: repeat(6, 1fr)
+    grid-gap: 5px
+    padding: 10px
+    box-sizing: border-box
+
+    &__container
+      display: flex
+      justify-content: center
+      align-items: center
+      flex-grow: 1
+      overflow: hidden
+
+    &__row
+      display: grid
+      grid-template-columns: repeat(5, 1fr)
+      grid-gap: 5px
+
+  &-tile
+    display: inline-flex
+    justify-content: center
+    align-items: center
+
+    font-size: 2rem
+    line-height: 2rem
+    font-weight: bold
+    vertical-align: middle
+    text-transform: uppercase
+    user-select: none
+
+    box-sizing: border-box
+    color: var(--tile-text-color)
+
+    &[data-state='correct']
+      background-color: var(--color-correct)
+
+    &[data-state='present']
+      background-color: var(--color-present)
+
+    &[data-state='absent']
+      background-color: var(--color-absent)
+
+    &[data-state='empty']
+      border: 2px solid var(--color-tone-4)

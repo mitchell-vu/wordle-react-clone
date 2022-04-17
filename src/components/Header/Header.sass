@@ -1,0 +1,31 @@
+.header
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  flex-wrap: nowrap
+  padding: 0 16px
+  height: var(--header-height)
+  color: var(--color-tone-1)
+  border-bottom: 1px solid var(--color-tone-4)
+
+  &__title
+    font-family: 'KarnakCondensed-Normal'
+    font-weight: 700
+    font-size: 37px
+    line-height: 100%
+    letter-spacing: 0.01em
+    text-align: center
+    left: 0
+    right: 0
+    pointer-events: none
+
+  &__left
+    display: flex
+    flex-direction: row
+    align-items: flex-end
+
+  &__right
+    display: flex
+    flex-direction: row
+    align-items: flex-start

@@ -3,12 +3,12 @@
   "name": "Wordle",
   "icons": [
     {
-      "src": "NYT-Wordle-Icon-192.png",
+      "src": "images/NYT-Wordle-Icon-192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "NYT-Wordle-Icon-32.png",
+      "src": "images/NYT-Wordle-Icon-32.png",
       "type": "image/png",
       "sizes": "32x32"
     }

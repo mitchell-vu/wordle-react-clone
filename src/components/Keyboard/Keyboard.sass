@@ -1,0 +1,38 @@
+.keyboard
+  margin: 0 8px
+  user-select: none
+
+  &__row
+    margin: 0 auto 8px
+    display: flex
+    width: 100%
+    
+  &__key
+    font-family: inherit
+    font-weight: bold
+    text-transform: uppercase
+
+    flex: 1
+    display: flex
+    justify-content: center
+    align-items: center
+    
+    height: 58px
+    padding: 0
+    margin-right: 6px
+    
+    border: 0
+    border-radius: 4px
+    color: var(--key-text-color)
+    
+    cursor: pointer
+    user-select: none
+    background-color: var(--key-bg)
+    -webkit-tap-highlight-color: rgba(0,0,0,0.3)
+
+    &:last-of-type
+      margin: 0
+
+.half
+  flex: 0.5
+

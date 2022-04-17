@@ -1,0 +1,20 @@
+{
+  "short_name": "Wordle - Mitchell Vu",
+  "name": "Wordle",
+  "icons": [
+    {
+      "src": "NYT-Wordle-Icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "NYT-Wordle-Icon-32.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

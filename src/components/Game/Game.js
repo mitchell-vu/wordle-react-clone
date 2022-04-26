@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Keyboard } from '../Keyboard/Keyboard';
 import { RowTile } from './RowTile';
 import { GameContext } from '../../context/game-context';
@@ -13,6 +13,8 @@ export const Game = () => {
   } = useContext(GameContext);
   const [currentGuess, setCurrentGuess] = useState('');
   const boardArr = [...boardState];
+  const boardRef = useRef();
+  const [boardSize, setBoardSize] = useState({});
 
   const onEnter = () => {
     const isReset = enterHandler(currentGuess);
@@ -37,10 +39,30 @@ export const Game = () => {
     boardArr[rowIndex] = currentGuess;
   }
 
+  const getBoardSize = () => {
+    const newHeight = boardRef.current.clientHeight;
+    
+    setBoardSize({
+      width: newHeight * 5 / 6,
+      height: newHeight,
+    });
+  };
+
+  useEffect(() => {
+    const innerHeight = window.innerHeight;
+    const boardHeight = innerHeight - 198 - 50;
+
+    setBoardSize({
+      width: boardHeight * 5 / 6,
+      height: boardHeight,
+    });
+    window.addEventListener("resize", getBoardSize);
+  }, []);
+
   return (
     <div className='game'>
-      <div className='game-board__container'>
-        <div className='game-board' style={{ width: 70 * 5, height: 70 * 6 }}>
+      <div className='game-board__container' ref={boardRef}>
+        <div className='game-board' style={boardSize}>
           {boardArr.map((rowWord, rowNum) => {
             return (
               <RowTile

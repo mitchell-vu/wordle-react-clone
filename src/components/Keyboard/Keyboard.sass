@@ -22,6 +22,7 @@
     margin-right: 6px
     
     border: 0
+    outline: 0
     border-radius: 4px
     color: var(--key-text-color)
     
@@ -33,6 +34,22 @@
     &:last-of-type
       margin: 0
 
+    &[data-state='correct']
+      background-color: var(--key-bg-correct)
+      color: var(--key-evaluated-text-color)
+
+    &[data-state='present']
+      background-color: var(--key-bg-present)
+      color: var(--key-evaluated-text-color)
+
+    &[data-state='absent']
+      background-color: var(--key-bg-absent)
+      color: var(--key-evaluated-text-color)
+
+
 .half
   flex: 0.5
 
+.one-and-a-half
+    flex: 1.5
+    font-size: 12px

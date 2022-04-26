@@ -40,26 +40,30 @@ export const Instructions = () => {
           </p>
           <Example
             instruction={
-              <>
+              (
+<>
                 The letter <strong>W</strong> is in the word and in the correct
                 spot.
               </>
+)
             }
           />
           <Example
             instruction={
-              <>
+              (
+<>
                 The letter <strong>I</strong> is in the word but in the wrong
                 spot.
               </>
+)
             }
           />
           <Example
-            instruction={
+            instruction={(
               <>
                 The letter <strong>U</strong> is not in the word in any spot.
               </>
-            }
+            )}
           />
         </div>
         <p>

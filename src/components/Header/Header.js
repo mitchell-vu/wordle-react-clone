@@ -12,7 +12,7 @@ export const Header = ({ toggleModal }) => {
         />
         <IconButton
           icon={<Icon icon='ic:baseline-help-outline' width='24' height='24' />}
-          onClick={toggleModal}
+          // onClick={toggleModal}
         />
       </div>
       <div className='header__title'>Wordle</div>
@@ -22,7 +22,7 @@ export const Header = ({ toggleModal }) => {
         />
         <IconButton
           icon={<Icon icon='ic:outline-settings' width='24' height='24' />}
-          onClick={toggleModal}
+          // onClick={toggleModal}
         />
       </div>
     </header>

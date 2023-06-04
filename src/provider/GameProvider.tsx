@@ -1,26 +1,49 @@
 import { createContext, useEffect, useState } from 'react';
 import { guessValidator } from '../utils/validator';
 
-export const GameContext = createContext({});
+interface GameContextProps {
+  boardState: string[];
+  evaluations: any[];
+  keyStatus: any;
+  gameStatus: 'IN_PROGRESS' | 'WIN' | 'LOSE';
+  hardMode: boolean;
+  rowIndex: number;
+  solution: string;
+  enterHandler: (guess: string) => boolean;
+}
 
-export const GameProvider = ({ children }) => {
+export const GameContext = createContext<GameContextProps>({
+  boardState: ['', '', '', '', '', ''],
+  evaluations: [''],
+  keyStatus: {},
+  gameStatus: 'IN_PROGRESS',
+  hardMode: false,
+  rowIndex: 0,
+  solution: '',
+  enterHandler: () => true,
+});
+interface GameProviderProps {
+  children: React.ReactNode;
+}
+
+const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [boardState, setBoardState] = useState(['', '', '', '', '', '']);
-  const [evaluations, setEvaluations] = useState([null, null, null, null, null]);
-  const [keyStatus, setKeyStatus] = useState({});
-  const [gameStatus, setGameStatus] = useState('IN_PROGRESS');    // WIN, LOSE
+  const [evaluations, setEvaluations] = useState<any[]>([null, null, null, null, null]);
+  const [keyStatus, setKeyStatus] = useState<any>({});
+  const [gameStatus, setGameStatus] = useState<'IN_PROGRESS' | 'WIN' | 'LOSE'>('IN_PROGRESS'); // WIN, LOSE
   const [hardMode, setHardMode] = useState(false);
   const [rowIndex, setRowIndex] = useState(0);
   const [solution, setSolution] = useState('');
 
   useEffect(() => {
     setGameStatus('IN_PROGRESS');
-    setHardMode('false');
+    setHardMode(false);
     setSolution('tommy');
   }, []);
 
   useEffect(() => {
     if (gameStatus === 'WIN') {
-      switch(rowIndex) {
+      switch (rowIndex) {
         case 0:
           alert('Genius');
           break;
@@ -40,13 +63,12 @@ export const GameProvider = ({ children }) => {
           alert('Phew');
           break;
       }
-    }
-    else if (gameStatus === 'LOSE') {
+    } else if (gameStatus === 'LOSE') {
       alert(`${solution.toUpperCase()}`);
     }
-  }, [gameStatus]);
+  }, [gameStatus, rowIndex, solution]);
 
-  const enterHandler = (guess) => {
+  const enterHandler = (guess: string) => {
     // Is game in progress
     if (gameStatus !== 'IN_PROGRESS') return true;
 
@@ -60,9 +82,9 @@ export const GameProvider = ({ children }) => {
 
     // Evaluate
     // -> array of 5 key states
-    const solutionArr = solution.split('').map(letter => letter.toUpperCase());
-    const evaluationArr = [];
-    const keyEvaluation = {};
+    const solutionArr: any[] = solution.split('').map((letter) => letter.toUpperCase());
+    const evaluationArr: any[] = [];
+    const keyEvaluation: any = {};
 
     // Check if is correct answer
     if (guess === solution.toUpperCase()) {
@@ -73,7 +95,7 @@ export const GameProvider = ({ children }) => {
       setGameStatus('WIN');
     } else {
       // Check for correct keys
-      for (let i = 0; i < solutionArr.length; i++) {     
+      for (let i = 0; i < solutionArr.length; i++) {
         const guessKey = guess[i];
 
         if (solutionArr[i] === guessKey) {
@@ -106,26 +128,25 @@ export const GameProvider = ({ children }) => {
     }
 
     // Set state
-    setBoardState(currState => {
+    setBoardState((currState) => {
       const board = [...currState];
 
       board.splice(rowIndex, 1, guess);
       return board;
     });
-    setEvaluations(currState => {
+    setEvaluations((currState) => {
       const evaluation = [...currState];
-      
+
       evaluation.splice(rowIndex, 1, evaluationArr);
       return evaluation;
     });
-    setKeyStatus(currState => ({ ...currState, ...keyEvaluation }));
+    setKeyStatus((currState: any) => ({ ...currState, ...keyEvaluation }));
 
     // Update row index
     if (rowIndex === 5) {
       setGameStatus('LOSE');
-    }
-    else {
-      setRowIndex(currRow => currRow + 1);
+    } else {
+      setRowIndex((currRow) => currRow + 1);
     }
 
     return true;
@@ -148,3 +169,5 @@ export const GameProvider = ({ children }) => {
     </GameContext.Provider>
   );
 };
+
+export default GameProvider;

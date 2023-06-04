@@ -1,0 +1,10 @@
+{
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-css-order", "prettier-plugin-tailwindcss"],
+  "printWidth": 120,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "editor.formatOnSave": true,
+  "bracketSpacing": true,
+  "semi": true
+}

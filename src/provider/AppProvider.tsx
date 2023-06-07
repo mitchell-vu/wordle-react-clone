@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 interface AppContextProps {
+  isPlaying: boolean;
+  startPlaying: () => void;
   darkMode: boolean;
   settingsModalOpen: boolean;
   toggleSettingsModal: () => void;
@@ -11,6 +13,8 @@ interface AppContextProps {
 }
 
 export const AppContext = React.createContext<AppContextProps>({
+  isPlaying: false,
+  startPlaying: () => {},
   darkMode: false,
   settingsModalOpen: false,
   toggleSettingsModal: () => {},
@@ -21,9 +25,13 @@ export const AppContext = React.createContext<AppContextProps>({
 });
 
 const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isPlaying, setIsPlaying] = React.useState(false);
+
   const [settingsModalOpen, setSettingsModalOpen] = React.useState(false);
   const [instructionModalOpen, setInstructionModalOpen] = React.useState(false);
   const [statisticsModalOpen, setStatisticsModalOpen] = React.useState(false);
+
+  const startPlaying = () => setIsPlaying(true);
 
   const toggleSettingsModal = () => setSettingsModalOpen((currState) => !currState);
   const toggleInstructionModal = () => setInstructionModalOpen((currState) => !currState);
@@ -32,6 +40,8 @@ const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        isPlaying,
+        startPlaying,
         darkMode: false,
         settingsModalOpen,
         toggleSettingsModal,

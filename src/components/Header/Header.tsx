@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   return (
     <header
       className={cn(
-        'flex h-16 flex-row flex-nowrap items-center justify-between gap-2 border-b px-4',
+        'flex h-16 shrink-0 flex-row flex-nowrap items-center justify-between gap-2 border-b px-4',
         'dark:border-b-neutral-700 dark:text-white',
       )}
     >

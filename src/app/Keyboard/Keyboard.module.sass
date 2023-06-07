@@ -1,0 +1,19 @@
+.key
+  height: 58px
+  margin-right: 6px
+
+  color: var(--key-text-color)
+  background-color: var(--key-bg)
+  -webkit-tap-highlight-color: rgba(0,0,0,0.3)
+
+  &[data-state='correct']
+    background-color: var(--key-bg-correct)
+    color: var(--key-evaluated-text-color)
+
+  &[data-state='present']
+    background-color: var(--key-bg-present)
+    color: var(--key-evaluated-text-color)
+
+  &[data-state='absent']
+    background-color: var(--key-bg-absent)
+    color: var(--key-evaluated-text-color)

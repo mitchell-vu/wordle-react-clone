@@ -3,7 +3,6 @@ import * as React from 'react';
 import { MdOutlineBackspace } from 'react-icons/md';
 import { GameContext } from '../../provider/GameProvider';
 import Key from './Key';
-import './Keyboard.sass';
 
 interface KeyboardProps {
   onAddChar: (letter: string) => void;

@@ -3,6 +3,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
     container: {
       center: true,
@@ -10,7 +11,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        karnak: ['Karnak-Condensed-Bold', ...defaultTheme.fontFamily.sans],
+        'karnak-condensed': ['Karnak Condensed Bold', ...defaultTheme.fontFamily.sans],
+        karnak: ['Karnak', ...defaultTheme.fontFamily.sans],
+        franklin: ['Libre Franklin', ...defaultTheme.fontFamily.sans],
       },
     },
   },

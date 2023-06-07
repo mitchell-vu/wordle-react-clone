@@ -1,10 +1,6 @@
 .game
-  width: 100%
   max-width: var(--game-max-width)
-  margin: 0 auto
   height: calc(100% - var(--header-height))
-  display: flex
-  flex-direction: column
 
   &-board
     max-width: 350px
@@ -17,32 +13,8 @@
     padding: 10px
     box-sizing: border-box
 
-    &__container
-      display: flex
-      justify-content: center
-      align-items: center
-      flex-grow: 1
-      overflow: hidden
-
-    &__row
-      display: grid
-      grid-template-columns: repeat(5, 1fr)
-      grid-gap: 5px
-
   &-tile
-    display: inline-flex
-    justify-content: center
-    align-items: center
-
-    font-size: 2rem
-    line-height: 2rem
-    font-weight: bold
-    vertical-align: middle
-    text-transform: uppercase
-    user-select: none
-
     box-sizing: border-box
-    color: var(--tile-text-color)
 
     &[data-state='correct']
       background-color: var(--color-correct)
@@ -75,6 +47,14 @@
       animation-duration: 250ms
       animation-timing-function: ease-in
 
+  &-tile
+    @apply text-black dark:text-white
+
+    &[data-state='tbd']
+      @apply dark:bg-neutral-900 dark:border-neutral-500
+
+    &[data-state='empty']
+      @apply dark:bg-neutral-900 dark:border-neutral-700
 
 @keyframes PopIn
   from
@@ -84,13 +64,11 @@
     transform: scale(1.1)
     opacity: 1
 
-
 @keyframes FlipIn
   0%
     transform: rotateX(0)
   100%
     transform: rotateX(-90deg)
-
 
 @keyframes FlipOut
   0%

@@ -4,14 +4,11 @@ import { useGame } from '../provider/GameProvider';
 import RowTile from './GridTile/RowTile';
 import Keyboard from './Keyboard/Keyboard';
 
-import { useApp } from '../provider/AppProvider';
 import './App.sass';
-import SettingsModal from './SettingsModal/SettingsModal';
+import { InstructionModal, SettingsModal, StatisticsModal } from './Modal';
 
 const App: React.FC = () => {
   const { boardState, evaluations, rowIndex, gameStatus, enterHandler } = useGame();
-  const { settingsModalOpen, toggleSettingsModal } = useApp();
-
   const [currentGuess, setCurrentGuess] = React.useState('');
   const boardRef = React.useRef<HTMLDivElement>(null);
   const [boardSize, setBoardSize] = React.useState({});
@@ -65,10 +62,11 @@ const App: React.FC = () => {
   }, [boardState, currentGuess, rowIndex]);
 
   return (
-    <>
+    <div className="font-franklin">
       <Header />
-      <div className="game">
-        <div className="game-board__container" ref={boardRef}>
+
+      <main className="game mx-auto flex w-full flex-col">
+        <div className="flex grow items-center justify-center overflow-hidden" ref={boardRef}>
           <div className="game-board" style={boardSize}>
             {boardData.map((rowWord, rowNum) => {
               return (
@@ -83,9 +81,12 @@ const App: React.FC = () => {
           </div>
         </div>
         <Keyboard onAddChar={onAddChar} onDelete={onDelete} onEnter={onEnter} />
-      </div>
-      <SettingsModal isOpen={settingsModalOpen} onClose={toggleSettingsModal} />
-    </>
+      </main>
+
+      <SettingsModal />
+      <InstructionModal />
+      <StatisticsModal />
+    </div>
   );
 };
 

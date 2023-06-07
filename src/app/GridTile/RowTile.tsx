@@ -16,7 +16,7 @@ const RowTile: React.FC<RowTileProps> = ({ word, evaluations, tileSize, isTbd = 
     wordFilledArr.push('');
   }
   return (
-    <div className="game-board__row">
+    <div className="grid grid-cols-5 gap-1">
       {wordFilledArr.map((letter, index) => (
         <KeyTile
           key={`${letter}-${index}`}

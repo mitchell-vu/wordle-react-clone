@@ -2,9 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+// FONT IMPORTS
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap');
+
 @font-face {
-  src: local('Karnak-Condensed-Bold'), url(../assets/fonts/Karnak-Condensed-Bold.woff2) format('woff');
-  font-family: 'Karnak-Condensed-Bold';
+  font-weight: 700;
+  src: local('Karnak Condensed Bold'), url(../assets/fonts/Karnak-Condensed-Bold.woff2) format('woff');
+  font-family: 'Karnak Condensed Bold';
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 400;
+  src: local('Karnak'), url(../assets/fonts/Karnak-Regular.woff2) format('woff');
+  font-family: 'Karnak';
 }
 
 /* VARIABLE CONFIG */
@@ -46,24 +57,14 @@
   --keyboard-height: 200px;
   --game-max-width: 500px;
   font-size: 16px;
-
-  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
-}
-
-/* THEME SETTINGS */
-:root {
-  --color-background: var(--color-tone-7);
 }
 
 html,
 #root {
-  height: 100%;
+  @apply h-full;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  margin: 0;
-  background-color: var(--color-background);
-  padding: 0;
-  height: 100%;
-  overflow-y: hidden;
+  @apply m-0 h-full overflow-y-hidden bg-white p-0 dark:bg-neutral-900;
 }

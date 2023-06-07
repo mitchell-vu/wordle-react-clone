@@ -15,16 +15,11 @@ const Keyboard: React.FC<KeyboardProps> = ({ onAddChar, onEnter, onDelete }) => 
   const { keyStatus } = React.useContext(GameContext);
 
   const onClick = (value: string) => {
-    if (value === 'Enter') {
-      onEnter();
-    } else if (value === 'Backspace') {
-      onDelete();
-    } else {
+    if (value === 'Enter') onEnter();
+    else if (value === 'Backspace') onDelete();
+    else {
       const key = value.toUpperCase();
-
-      if (key.length === 1 && key >= 'A' && key <= 'Z') {
-        onAddChar(key);
-      }
+      if (key.length === 1 && key >= 'A' && key <= 'Z') onAddChar(key);
     }
   };
 
@@ -46,29 +41,29 @@ const Keyboard: React.FC<KeyboardProps> = ({ onAddChar, onEnter, onDelete }) => 
   }, [onEnter, onDelete, onAddChar]);
 
   return (
-    <div className="keyboard">
-      <div className="keyboard__row">
+    <div className="keyboard mx-2 select-none">
+      <div className="mx-auto mb-2 flex w-full">
         {['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'].map((key, index) => {
-          return <Key key={index} letter={key} state={keyStatus[key]} onClick={onClick} className="fade" />;
+          return <Key key={index} letter={key} state={keyStatus[key]} onClick={onClick} className="fade flex-1" />;
         })}
       </div>
-      <div className="keyboard__row">
-        <Key className="half" />
+      <div className="mx-auto mb-2 flex w-full">
+        <Key className="half flex-[0.5]" />
         {['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'].map((key, index) => {
-          return <Key key={index} letter={key} state={keyStatus[key]} onClick={onClick} />;
+          return <Key key={index} letter={key} state={keyStatus[key]} onClick={onClick} className="flex-1" />;
         })}
-        <Key className="half" />
+        <Key className="half flex-[0.5]" />
       </div>
-      <div className="keyboard__row">
-        <Key letter={'Enter'} onClick={onClick} className="one-and-a-half" />
+      <div className="mx-auto mb-2 flex w-full">
+        <Key letter={'Enter'} onClick={onClick} className="one-and-a-half flex-[1.5] text-xs" />
         {['Z', 'X', 'C', 'V', 'B', 'N', 'M'].map((key, index) => {
-          return <Key key={index} letter={key} state={keyStatus[key]} onClick={onClick} />;
+          return <Key key={index} letter={key} state={keyStatus[key]} onClick={onClick} className="flex-1" />;
         })}
         <Key
           letter={'Backspace'}
           icon={<MdOutlineBackspace size="1.5rem" />}
           onClick={onClick}
-          className="one-and-a-half"
+          className="one-and-a-half flex-[1.5] text-xs"
         />
       </div>
     </div>

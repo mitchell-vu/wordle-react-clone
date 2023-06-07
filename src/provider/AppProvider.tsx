@@ -4,27 +4,43 @@ interface AppContextProps {
   darkMode: boolean;
   settingsModalOpen: boolean;
   toggleSettingsModal: () => void;
+  instructionModalOpen: boolean;
+  toggleInstructionModal: () => void;
+  statisticsModalOpen: boolean;
+  toggleStatisticsModal: () => void;
 }
 
 export const AppContext = React.createContext<AppContextProps>({
   darkMode: false,
   settingsModalOpen: false,
   toggleSettingsModal: () => {},
+  instructionModalOpen: false,
+  toggleInstructionModal: () => {},
+  statisticsModalOpen: false,
+  toggleStatisticsModal: () => {},
 });
 
-interface AppProviderProps {
-  children: React.ReactNode;
-}
-
-const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
+const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [settingsModalOpen, setSettingsModalOpen] = React.useState(false);
+  const [instructionModalOpen, setInstructionModalOpen] = React.useState(false);
+  const [statisticsModalOpen, setStatisticsModalOpen] = React.useState(false);
 
-  const toggleSettingsModal = () => {
-    setSettingsModalOpen(!settingsModalOpen);
-  };
+  const toggleSettingsModal = () => setSettingsModalOpen((currState) => !currState);
+  const toggleInstructionModal = () => setInstructionModalOpen((currState) => !currState);
+  const toggleStatisticsModal = () => setStatisticsModalOpen((currState) => !currState);
 
   return (
-    <AppContext.Provider value={{ darkMode: false, settingsModalOpen, toggleSettingsModal }}>
+    <AppContext.Provider
+      value={{
+        darkMode: false,
+        settingsModalOpen,
+        toggleSettingsModal,
+        instructionModalOpen,
+        toggleInstructionModal,
+        statisticsModalOpen,
+        toggleStatisticsModal,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

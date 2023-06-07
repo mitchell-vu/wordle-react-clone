@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from 'react';
 import { guessValidator } from '../utils/validator';
+import { FixMeLater } from '../vite-env';
 
 interface GameContextProps {
   boardState: string[];
-  evaluations: any[];
-  keyStatus: any;
+  evaluations: FixMeLater[];
+  keyStatus: FixMeLater;
   gameStatus: 'IN_PROGRESS' | 'WIN' | 'LOSE';
   hardMode: boolean;
   rowIndex: number;
@@ -28,8 +29,8 @@ interface GameProviderProps {
 
 const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [boardState, setBoardState] = useState(['', '', '', '', '', '']);
-  const [evaluations, setEvaluations] = useState<any[]>([null, null, null, null, null]);
-  const [keyStatus, setKeyStatus] = useState<any>({});
+  const [evaluations, setEvaluations] = useState<FixMeLater[]>([null, null, null, null, null]);
+  const [keyStatus, setKeyStatus] = useState<FixMeLater>({});
   const [gameStatus, setGameStatus] = useState<'IN_PROGRESS' | 'WIN' | 'LOSE'>('IN_PROGRESS'); // WIN, LOSE
   const [hardMode, setHardMode] = useState(false);
   const [rowIndex, setRowIndex] = useState(0);
@@ -82,9 +83,9 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 
     // Evaluate
     // -> array of 5 key states
-    const solutionArr: any[] = solution.split('').map((letter) => letter.toUpperCase());
-    const evaluationArr: any[] = [];
-    const keyEvaluation: any = {};
+    const solutionArr: FixMeLater[] = solution.split('').map((letter) => letter.toUpperCase());
+    const evaluationArr: FixMeLater[] = [];
+    const keyEvaluation: FixMeLater = {};
 
     // Check if is correct answer
     if (guess === solution.toUpperCase()) {
@@ -140,7 +141,7 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
       evaluation.splice(rowIndex, 1, evaluationArr);
       return evaluation;
     });
-    setKeyStatus((currState: any) => ({ ...currState, ...keyEvaluation }));
+    setKeyStatus((currState: FixMeLater) => ({ ...currState, ...keyEvaluation }));
 
     // Update row index
     if (rowIndex === 5) {

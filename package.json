@@ -6,10 +6,31 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:write": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
+    "prettier": "prettier --write src/**/*.tsx",
+    "prettier-styles": "prettier --write src/**/*.sass",
     "preview": "vite preview",
     "postinstall": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.tsx": [
+      "npm run lint:write",
+      "npm run lint",
+      "npm run prettier",
+      "git add -A"
+    ],
+    "*.ts": [
+      "npm run lint:write",
+      "npm run lint",
+      "npm run prettier",
+      "git add -A"
+    ]
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",

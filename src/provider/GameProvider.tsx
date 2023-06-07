@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { guessValidator } from '../utils/validator';
 import { FixMeLater } from '../vite-env';
 
@@ -23,6 +23,7 @@ export const GameContext = createContext<GameContextProps>({
   solution: '',
   enterHandler: () => true,
 });
+
 interface GameProviderProps {
   children: React.ReactNode;
 }
@@ -172,3 +173,6 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 };
 
 export default GameProvider;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useGame = () => useContext(GameContext);

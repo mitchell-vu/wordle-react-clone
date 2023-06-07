@@ -1,21 +1,44 @@
 import * as React from 'react';
 import Header from '../components/Header/Header';
-import { GameContext } from '../provider/GameProvider';
+import { useGame } from '../provider/GameProvider';
 import RowTile from './GridTile/RowTile';
 import Keyboard from './Keyboard/Keyboard';
 
+import { useApp } from '../provider/AppProvider';
 import './App.sass';
+import SettingsModal from './SettingsModal/SettingsModal';
 
 const App: React.FC = () => {
-  const { boardState, evaluations, rowIndex, gameStatus, enterHandler } = React.useContext(GameContext);
+  const { boardState, evaluations, rowIndex, gameStatus, enterHandler } = useGame();
+  const { settingsModalOpen, toggleSettingsModal } = useApp();
+
   const [currentGuess, setCurrentGuess] = React.useState('');
-  const boardArr = [...boardState];
   const boardRef = React.useRef<HTMLDivElement>(null);
   const [boardSize, setBoardSize] = React.useState({});
 
+  React.useEffect(() => {
+    const innerHeight = window.innerHeight;
+    const boardHeight = innerHeight - 198 - 50;
+
+    const getBoardSize = () => {
+      const newHeight = boardRef.current?.clientHeight ?? 0;
+
+      setBoardSize({
+        width: (newHeight * 5) / 6,
+        height: newHeight,
+      });
+    };
+
+    setBoardSize({
+      width: (boardHeight * 5) / 6,
+      height: boardHeight,
+    });
+
+    window.addEventListener('resize', getBoardSize);
+  }, []);
+
   const onEnter = () => {
     const isReset = enterHandler(currentGuess);
-
     if (isReset) setCurrentGuess('');
   };
 
@@ -31,28 +54,15 @@ const App: React.FC = () => {
   };
 
   if (gameStatus === 'IN_PROGRESS') {
-    boardArr[rowIndex] = currentGuess;
+    boardState[rowIndex] = currentGuess;
   }
 
-  const getBoardSize = () => {
-    const newHeight = boardRef.current?.clientHeight ?? 0;
+  const boardData = React.useMemo(() => {
+    const boardData = [...boardState];
+    boardData[rowIndex] = currentGuess;
 
-    setBoardSize({
-      width: (newHeight * 5) / 6,
-      height: newHeight,
-    });
-  };
-
-  React.useEffect(() => {
-    const innerHeight = window.innerHeight;
-    const boardHeight = innerHeight - 198 - 50;
-
-    setBoardSize({
-      width: (boardHeight * 5) / 6,
-      height: boardHeight,
-    });
-    window.addEventListener('resize', getBoardSize);
-  }, []);
+    return boardData;
+  }, [boardState, currentGuess, rowIndex]);
 
   return (
     <>
@@ -60,15 +70,13 @@ const App: React.FC = () => {
       <div className="game">
         <div className="game-board__container" ref={boardRef}>
           <div className="game-board" style={boardSize}>
-            {boardArr.map((rowWord, rowNum) => {
+            {boardData.map((rowWord, rowNum) => {
               return (
                 <RowTile
                   key={rowNum}
                   word={rowWord}
                   evaluations={evaluations[rowNum]}
-                  // rowIndex={rowIndex}
                   isTbd={rowNum === rowIndex && gameStatus === 'IN_PROGRESS'}
-                  // tileSize={24}
                 />
               );
             })}
@@ -76,6 +84,7 @@ const App: React.FC = () => {
         </div>
         <Keyboard onAddChar={onAddChar} onDelete={onDelete} onEnter={onEnter} />
       </div>
+      <SettingsModal isOpen={settingsModalOpen} onClose={toggleSettingsModal} />
     </>
   );
 };

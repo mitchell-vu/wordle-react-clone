@@ -1,6 +1,6 @@
+import { guessValidator } from '@/utils/validator';
+import { FixMeLater } from '@/vite-env';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { guessValidator } from '../utils/validator';
-import { FixMeLater } from '../vite-env';
 
 interface GameContextProps {
   boardState: string[];

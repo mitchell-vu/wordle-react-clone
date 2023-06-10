@@ -1,7 +1,6 @@
-// import { GameContext } from '../../context/game-context';
+import { GameContext } from '@/provider/GameProvider';
 import * as React from 'react';
 import { MdOutlineBackspace } from 'react-icons/md';
-import { GameContext } from '../../provider/GameProvider';
 import Key from './Key';
 
 interface KeyboardProps {

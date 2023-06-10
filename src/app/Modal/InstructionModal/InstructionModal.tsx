@@ -1,6 +1,6 @@
+import { BaseModal } from '@/components';
+import { useApp } from '@/provider/AppProvider';
 import * as React from 'react';
-import { BaseModal } from '../../../components';
-import { useApp } from '../../../provider/AppProvider';
 
 const InstructionModal: React.FC = () => {
   const { instructionModalOpen, toggleInstructionModal } = useApp();

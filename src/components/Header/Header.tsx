@@ -1,7 +1,7 @@
+import { useApp } from '@/provider/AppProvider';
 import cn from 'classnames';
 import * as React from 'react';
 import { TbChartBar, TbMenu2, TbQuestionCircle, TbSettings } from 'react-icons/tb';
-import { useApp } from '../../provider/AppProvider';
 
 const Header: React.FC = () => {
   const { toggleSettingsModal, toggleInstructionModal, toggleStatisticsModal } = useApp();

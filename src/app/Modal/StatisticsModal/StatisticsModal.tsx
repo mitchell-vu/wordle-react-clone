@@ -1,6 +1,6 @@
+import { BaseModal } from '@/components';
+import { useApp } from '@/provider/AppProvider';
 import * as React from 'react';
-import { BaseModal } from '../../../components';
-import { useApp } from '../../../provider/AppProvider';
 
 const StatisticsModal: React.FC = () => {
   const { statisticsModalOpen, toggleStatisticsModal } = useApp();

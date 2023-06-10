@@ -7,14 +7,14 @@
 
 @font-face {
   font-weight: 700;
-  src: local('Karnak Condensed Bold'), url(../assets/fonts/Karnak-Condensed-Bold.woff2) format('woff');
+  src: local('Karnak Condensed Bold'), url(@/assets/fonts/Karnak-Condensed-Bold.woff2) format('woff');
   font-family: 'Karnak Condensed Bold';
 }
 
 @font-face {
   font-style: normal;
   font-weight: 400;
-  src: local('Karnak'), url(../assets/fonts/Karnak-Regular.woff2) format('woff');
+  src: local('Karnak'), url(@/assets/fonts/Karnak-Regular.woff2) format('woff');
   font-family: 'Karnak';
 }
 

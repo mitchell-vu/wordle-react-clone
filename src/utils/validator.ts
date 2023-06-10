@@ -1,5 +1,5 @@
-import VALID_GUESSES from '../constants/valid-guesses';
-import WORDS from '../constants/word-list';
+import VALID_GUESSES from '@/constants/valid-guesses';
+import WORDS from '@/constants/word-list';
 
 export const guessValidator = (guess: string, wordLength: number): { valid: boolean; message?: string } => {
   if (guess.length !== wordLength) {

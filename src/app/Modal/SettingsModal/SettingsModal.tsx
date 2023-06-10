@@ -1,6 +1,6 @@
+import { BaseModal, Toggle } from '@/components';
+import { useApp } from '@/provider/AppProvider';
 import * as React from 'react';
-import { BaseModal, Toggle } from '../../../components';
-import { useApp } from '../../../provider/AppProvider';
 
 const SETTINGS = [
   {

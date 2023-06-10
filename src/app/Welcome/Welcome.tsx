@@ -1,12 +1,13 @@
+import WordleIcon from '@/assets/svg/wordle-icon.svg';
+import { useApp } from '@/provider/AppProvider';
+import { Transition } from '@headlessui/react';
 import moment from 'moment';
 import * as React from 'react';
-import WordleIcon from '../../assets/svg/wordle-icon.svg';
-import { useApp } from '../../provider/AppProvider';
 
 // const SUB_TITLE = 'Go ahead, add another day to your 1 day streak.';
 
 const Welcome: React.FC = () => {
-  const { startPlaying, toggleInstructionModal } = useApp();
+  const { isPlaying, startPlaying, toggleInstructionModal } = useApp();
 
   const handleHowToPlay = () => {
     startPlaying();
@@ -14,27 +15,40 @@ const Welcome: React.FC = () => {
   };
 
   return (
-    <div className="h-screen bg-[#e3e3e1] font-franklin">
-      <div className="flex h-full flex-col items-center justify-center px-10 text-center">
-        <img src={WordleIcon} alt="Wordle" className="mb-4 h-16 object-contain" />
-        <h1 className="font-karnak-condensed text-4xl">Wordle</h1>
+    <Transition appear show={!isPlaying} as={React.Fragment}>
+      <Transition.Child as={React.Fragment} leave="ease-out duration-300" leaveFrom="opacity-100" leaveTo="opacity-0">
+        <div className="h-screen bg-[#e3e3e1] font-franklin">
+          <div className="flex h-full flex-col items-center justify-center px-10 text-center">
+            <img src={WordleIcon} alt="Wordle" className="mb-4 h-16 object-contain" />
+            <h1 className="mb-3 font-karnak-condensed text-4xl md:text-5xl lg:text-6xl">Wordle</h1>
 
-        <div className="mb-7 text-2xl">
-          Get 6 chances to guess a <span className="whitespace-nowrap">5-letter</span> word.
+            <div className="mb-7 text-2xl md:max-w-xs md:text-3xl lg:max-w-sm lg:text-4xl">
+              Get 6 chances to guess a <span className="whitespace-nowrap">5-letter</span> word.
+            </div>
+
+            <div className="mb-6 flex w-full flex-col-reverse items-center justify-center gap-y-2 md:flex-row md:gap-x-5">
+              <button
+                onClick={handleHowToPlay}
+                className="h-12 w-40 rounded-full border border-black text-black md:w-44"
+              >
+                How to Play
+              </button>
+              <button
+                onClick={handleHowToPlay}
+                className="h-12 w-40 rounded-full border border-black text-black md:w-44"
+              >
+                Login
+              </button>
+              <button onClick={startPlaying} className="h-12 w-40 rounded-full bg-black text-white md:w-44">
+                Play
+              </button>
+            </div>
+
+            <div className="font-semibold">{moment().format('MMMM D, YYYY')}</div>
+          </div>
         </div>
-
-        <div className="mb-6 flex w-full flex-col items-center justify-center gap-2">
-          <button onClick={startPlaying} className="h-12 w-36 rounded-full bg-black text-white">
-            Play
-          </button>
-          <button onClick={handleHowToPlay} className="h-12 w-36 rounded-full border border-black text-black">
-            How to Play
-          </button>
-        </div>
-
-        <div className="font-bold">{moment().format('MMMM D, YYYY')}</div>
-      </div>
-    </div>
+      </Transition.Child>
+    </Transition>
   );
 };
 

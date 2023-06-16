@@ -10,7 +10,7 @@ const StatisticsModal: React.FC = () => {
       isOpen={statisticsModalOpen}
       onClose={toggleStatisticsModal}
       title="Statistics"
-      className="flex flex-col"
+      className="flex h-4/6 flex-col sm:h-auto"
     >
       <div className="w-[320px] self-center">
         <section className="mb-4 grid grid-cols-4 text-center">

@@ -9,7 +9,7 @@ interface KeyTileProps {
 
 const KeyTile: React.FunctionComponent<KeyTileProps> = ({ letter, state }) => {
   const { settings } = useApp();
-  const { colorblindMode } = settings;
+  const { colorBlindMode } = settings;
 
   return (
     <div
@@ -21,8 +21,8 @@ const KeyTile: React.FunctionComponent<KeyTileProps> = ({ letter, state }) => {
           'bg-green-500  text-white dark:bg-green-600': state === 'correct',
           'bg-yellow-500  text-white dark:bg-yellow-600': state === 'present',
           'bg-neutral-500  text-white dark:bg-neutral-700': state === 'absent',
-          '!bg-orange-500': colorblindMode && state === 'correct',
-          '!bg-blue-400': colorblindMode && state === 'present',
+          '!bg-orange-500': colorBlindMode && state === 'correct',
+          '!bg-blue-400': colorBlindMode && state === 'present',
         },
       )}
     >

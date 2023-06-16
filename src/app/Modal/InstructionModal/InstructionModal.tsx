@@ -12,6 +12,7 @@ const InstructionModal: React.FC = () => {
       onClose={toggleInstructionModal}
       title="How To Play"
       subTitle="Guess the Wordle in 6 tries."
+      className="h-[calc(100vh-30px)] sm:h-auto"
     >
       <section className="flex flex-col items-stretch">
         <ul className="mb-4 list-disc pl-4 text-sm">
@@ -27,7 +28,7 @@ const InstructionModal: React.FC = () => {
                 .toUpperCase()
                 .split('')
                 .map((letter, index) => (
-                  <KeyTile letter={letter} state={index === 0 ? 'correct' : 'tbd'} />
+                  <KeyTile key={`${letter}-${index}`} letter={letter} state={index === 0 ? 'correct' : 'tbd'} />
                 ))}
             </div>
             <div className="mt-1">
@@ -40,7 +41,7 @@ const InstructionModal: React.FC = () => {
                 .toUpperCase()
                 .split('')
                 .map((letter, index) => (
-                  <KeyTile letter={letter} state={index === 1 ? 'present' : 'tbd'} />
+                  <KeyTile key={`${letter}-${index}`} letter={letter} state={index === 1 ? 'present' : 'tbd'} />
                 ))}
             </div>
             <div className="mt-1">
@@ -53,7 +54,7 @@ const InstructionModal: React.FC = () => {
                 .toUpperCase()
                 .split('')
                 .map((letter, index) => (
-                  <KeyTile letter={letter} state={index === 3 ? 'absent' : 'tbd'} />
+                  <KeyTile key={`${letter}-${index}`} letter={letter} state={index === 3 ? 'absent' : 'tbd'} />
                 ))}
             </div>
             <div className="mt-1">

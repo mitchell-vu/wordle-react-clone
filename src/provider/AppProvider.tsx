@@ -4,7 +4,7 @@ import { useLocalStorage } from 'usehooks-ts';
 export interface AppSettingsProps {
   hardMode: boolean;
   darkTheme: boolean;
-  colorblindMode: boolean;
+  colorBlindMode: boolean;
 }
 
 interface AppContextProps {
@@ -23,7 +23,7 @@ interface AppContextProps {
 const INITIAL_APP_SETTINGS = {
   hardMode: false,
   darkTheme: false,
-  colorblindMode: false,
+  colorBlindMode: false,
 };
 
 export const AppContext = React.createContext<AppContextProps>({

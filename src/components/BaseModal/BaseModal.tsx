@@ -33,7 +33,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div className={cn('flex min-h-full items-end justify-center text-center', 'sm:items-center sm:p-4')}>
             <Transition.Child
               as={React.Fragment}
               enter="ease-out duration-200 transform"
@@ -46,7 +46,9 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
               <Dialog.Panel
                 as="dialog"
                 className={cn(
-                  'w-full max-w-lg transform overflow-hidden rounded-lg border border-neutral-100 bg-white p-6 text-left align-middle font-franklin drop-shadow-2xl transition-all',
+                  'w-full max-w-lg overflow-hidden rounded-lg rounded-b-none border p-8 text-left align-middle font-franklin',
+                  'border-neutral-100 bg-white drop-shadow-2xl transition-all',
+                  'sm:rounded-b-lg',
                   'dark:border-neutral-800 dark:bg-neutral-950 dark:text-white',
                   className,
                 )}

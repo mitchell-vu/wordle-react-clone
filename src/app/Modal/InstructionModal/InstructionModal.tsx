@@ -1,5 +1,7 @@
 import { BaseModal } from '@/components';
 import { useApp } from '@/provider/AppProvider';
+import { isIos } from '@/utils/helpers';
+import cn from 'classnames';
 import * as React from 'react';
 import KeyTile from './KeyTile';
 
@@ -12,7 +14,7 @@ const InstructionModal: React.FC = () => {
       onClose={toggleInstructionModal}
       title="How To Play"
       subTitle="Guess the Wordle in 6 tries."
-      className="h-[calc(100vh-30px)] sm:h-auto"
+      className={cn('mt-10 sm:h-auto', { 'min-h-screen-mobile': isIos() })}
     >
       <section className="flex flex-col items-stretch">
         <ul className="mb-4 list-disc pl-4 text-sm">

@@ -62,7 +62,7 @@ const Game: React.FC = () => {
   return (
     <main className={cn(styles.game, 'mx-auto flex w-full grow flex-col')}>
       <div className="flex grow items-center justify-center overflow-hidden" ref={boardRef}>
-        <div className={styles.board} style={boardSize}>
+        <div className={cn(styles.board, 'grid grid-rows-6 gap-[5px] p-[10px]')} style={boardSize}>
           {boardData.map((rowWord, rowNum) => {
             return (
               <RowTile

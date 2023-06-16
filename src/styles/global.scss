@@ -18,19 +18,37 @@
   font-family: 'Karnak';
 }
 
-/* VARIABLE CONFIG */
-:root {
-  --header-height: 50px;
-  --keyboard-height: 200px;
-  --game-max-width: 500px;
+@layer base {
+  :root {
+    --header-height: 50px;
+    --keyboard-height: 200px;
+    --game-max-width: 500px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply m-0 box-border p-0;
+  }
+
+  html,
+  #root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white dark:bg-neutral-950;
+    min-height: -webkit-fill-available;
+    min-height: -moz-available;
+    min-height: stretch;
+  }
 }
 
-html,
-#root {
-  @apply h-full bg-white dark:bg-neutral-950;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  @apply m-0 h-full bg-white dark:bg-neutral-950;
+@layer utilities {
+  .min-h-screen-mobile {
+    min-height: -webkit-fill-available;
+    min-height: -moz-available;
+    min-height: stretch;
+  }
 }

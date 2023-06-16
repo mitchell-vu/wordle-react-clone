@@ -1,4 +1,5 @@
 import { useApp } from '@/provider/AppProvider';
+import { isIos } from '@/utils/helpers';
 import { Dialog, Transition } from '@headlessui/react';
 import cn from 'classnames';
 import * as React from 'react';
@@ -33,7 +34,12 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className={cn('flex min-h-full items-end justify-center text-center', 'sm:items-center sm:p-4')}>
+          <div
+            className={cn('flex items-end justify-center text-center', 'sm:items-center sm:p-4', {
+              'min-h-screen-mobile': isIos(),
+              'min-h-screen': !isIos(),
+            })}
+          >
             <Transition.Child
               as={React.Fragment}
               enter="ease-out duration-200 transform"

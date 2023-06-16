@@ -1,6 +1,7 @@
 import { BaseModal } from '@/components';
 import { useApp } from '@/provider/AppProvider';
 import * as React from 'react';
+import KeyTile from './KeyTile';
 
 const InstructionModal: React.FC = () => {
   const { instructionModalOpen, toggleInstructionModal } = useApp();
@@ -13,7 +14,7 @@ const InstructionModal: React.FC = () => {
       subTitle="Guess the Wordle in 6 tries."
     >
       <section className="flex flex-col items-stretch">
-        <ul className="mb-4 list-disc pl-4">
+        <ul className="mb-4 list-disc pl-4 text-sm">
           <li>Each guess must be a valid 5-letter word.</li>
           <li>The color of the tiles will change to show how close your guess was to the word.</li>
         </ul>
@@ -21,13 +22,43 @@ const InstructionModal: React.FC = () => {
         <div>
           <p className="font-bold">Examples</p>
           <div className="mb-5 mt-2">
-            <b>W</b> is in the word and in the correct spot.
+            <div className="flex flex-row gap-1">
+              {'Weary'
+                .toUpperCase()
+                .split('')
+                .map((letter, index) => (
+                  <KeyTile letter={letter} state={index === 0 ? 'correct' : 'tbd'} />
+                ))}
+            </div>
+            <div className="mt-1">
+              <b>W</b> is in the word and in the correct spot.
+            </div>
           </div>
           <div className="mb-5 mt-2">
-            <b>U</b> is in the word but in the wrong spot.
+            <div className="flex flex-row gap-1">
+              {'Pills'
+                .toUpperCase()
+                .split('')
+                .map((letter, index) => (
+                  <KeyTile letter={letter} state={index === 1 ? 'present' : 'tbd'} />
+                ))}
+            </div>
+            <div className="mt-1">
+              <b>U</b> is in the word but in the wrong spot.
+            </div>
           </div>
           <div className="mb-5 mt-2">
-            <b>I</b> is not in the word in any spot
+            <div className="flex flex-row gap-1">
+              {'Vague'
+                .toUpperCase()
+                .split('')
+                .map((letter, index) => (
+                  <KeyTile letter={letter} state={index === 3 ? 'absent' : 'tbd'} />
+                ))}
+            </div>
+            <div className="mt-1">
+              <b>I</b> is not in the word in any spot
+            </div>
           </div>
         </div>
 

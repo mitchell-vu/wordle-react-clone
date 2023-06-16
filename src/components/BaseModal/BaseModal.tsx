@@ -1,5 +1,6 @@
+import { useApp } from '@/provider/AppProvider';
 import { Dialog, Transition } from '@headlessui/react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import * as React from 'react';
 import { HiXMark } from 'react-icons/hi2';
 
@@ -13,9 +14,12 @@ interface BaseModalProps {
 }
 
 const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title, subTitle, className }) => {
+  const { settings } = useApp();
+  const { darkTheme } = settings;
+
   return (
     <Transition appear show={isOpen} as={React.Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={onClose}>
+      <Dialog as="div" className={cn('relative z-10', { dark: darkTheme, light: !darkTheme })} onClose={onClose}>
         <Transition.Child
           as={React.Fragment}
           enter="ease-out duration-100"
@@ -41,9 +45,9 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
             >
               <Dialog.Panel
                 as="dialog"
-                className={classNames(
+                className={cn(
                   'w-full max-w-lg transform overflow-hidden rounded-lg border border-neutral-100 bg-white p-6 text-left align-middle font-franklin drop-shadow-2xl transition-all',
-                  'dark:border-neutral-800 dark:bg-neutral-900 dark:text-white',
+                  'dark:border-neutral-800 dark:bg-neutral-950 dark:text-white',
                   className,
                 )}
                 open

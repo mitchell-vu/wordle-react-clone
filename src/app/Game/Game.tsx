@@ -1,9 +1,9 @@
-import RowTile from '@/app/GridTile/RowTile';
-import Keyboard from '@/app/Keyboard/Keyboard';
 import { useGame } from '@/provider/GameProvider';
 import cn from 'classnames';
 import * as React from 'react';
 import styles from './Game.module.sass';
+import RowTile from './GridTile/RowTile';
+import Keyboard from './Keyboard/Keyboard';
 
 const Game: React.FC = () => {
   const { boardState, evaluations, rowIndex, gameStatus, enterHandler } = useGame();

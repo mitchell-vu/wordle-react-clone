@@ -1,3 +1,4 @@
+import WORDS from '@/constants/word-list.json';
 import { guessValidator } from '@/utils/validator';
 import { FixMeLater } from '@/vite-env';
 import { createContext, useContext, useEffect, useState } from 'react';
@@ -7,7 +8,6 @@ interface GameContextProps {
   evaluations: FixMeLater[];
   keyStatus: FixMeLater;
   gameStatus: 'IN_PROGRESS' | 'WIN' | 'LOSE';
-  hardMode: boolean;
   rowIndex: number;
   solution: string;
   enterHandler: (guess: string) => boolean;
@@ -18,7 +18,6 @@ export const GameContext = createContext<GameContextProps>({
   evaluations: [''],
   keyStatus: {},
   gameStatus: 'IN_PROGRESS',
-  hardMode: false,
   rowIndex: 0,
   solution: '',
   enterHandler: () => true,
@@ -32,15 +31,15 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   const [boardState, setBoardState] = useState(['', '', '', '', '', '']);
   const [evaluations, setEvaluations] = useState<FixMeLater[]>([null, null, null, null, null]);
   const [keyStatus, setKeyStatus] = useState<FixMeLater>({});
-  const [gameStatus, setGameStatus] = useState<'IN_PROGRESS' | 'WIN' | 'LOSE'>('IN_PROGRESS'); // WIN, LOSE
-  const [hardMode, setHardMode] = useState(false);
+  const [gameStatus, setGameStatus] = useState<'IN_PROGRESS' | 'WIN' | 'LOSE'>('IN_PROGRESS');
   const [rowIndex, setRowIndex] = useState(0);
   const [solution, setSolution] = useState('');
 
   useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * WORDS.length);
+
     setGameStatus('IN_PROGRESS');
-    setHardMode(false);
-    setSolution('tommy');
+    setSolution(WORDS[randomIndex] as string);
   }, []);
 
   useEffect(() => {
@@ -161,7 +160,6 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
         evaluations,
         keyStatus,
         gameStatus,
-        hardMode,
         rowIndex,
         solution,
         enterHandler,

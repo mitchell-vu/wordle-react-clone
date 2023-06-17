@@ -1,3 +1,4 @@
+import { ToastContainer } from '@/components';
 import Header from '@/components/Header/Header';
 import { useApp } from '@/provider/AppProvider';
 import { isIos } from '@/utils/helpers';
@@ -26,6 +27,8 @@ const App: React.FC = () => {
           <SettingsModal />
           <InstructionModal />
           <StatisticsModal />
+
+          <ToastContainer />
         </div>
       )}
     </div>

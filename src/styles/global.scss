@@ -18,6 +18,13 @@
   font-family: 'Karnak';
 }
 
+@font-face {
+  font-style: normal;
+  font-weight: 500;
+  src: local('Karnak'), url(@/assets/fonts/Karnak-Medium.woff2) format('woff');
+  font-family: 'Karnak';
+}
+
 @layer base {
   :root {
     --header-height: 50px;

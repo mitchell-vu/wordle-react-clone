@@ -10,7 +10,7 @@ const SETTINGS = [
   },
   {
     title: 'Dark Theme',
-    setting: 'darkTheme',
+    setting: 'darkMode',
   },
   {
     title: 'High Contrast Mode',

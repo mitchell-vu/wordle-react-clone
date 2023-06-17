@@ -1,3 +1,4 @@
+import { GUESS_CHANCES, WORD_LENGTH } from '@/constants/settings';
 import { useGame } from '@/provider/GameProvider';
 import cn from 'classnames';
 import * as React from 'react';
@@ -19,13 +20,13 @@ const Game: React.FC = () => {
       const newHeight = boardRef.current?.clientHeight ?? 0;
 
       setBoardSize({
-        width: (newHeight * 5) / 6,
+        width: (newHeight * WORD_LENGTH) / GUESS_CHANCES,
         height: newHeight,
       });
     };
 
     setBoardSize({
-      width: (boardHeight * 5) / 6,
+      width: (boardHeight * WORD_LENGTH) / GUESS_CHANCES,
       height: boardHeight,
     });
 
@@ -33,14 +34,12 @@ const Game: React.FC = () => {
   }, []);
 
   const onEnter = () => {
-    const isReset = enterHandler(currentGuess);
-    if (isReset) setCurrentGuess('');
+    if (enterHandler(currentGuess)) setCurrentGuess('');
   };
 
   const onAddChar = (char: string) => {
-    if (gameStatus === 'IN_PROGRESS') {
-      setCurrentGuess((currState) => (currState.length < 5 ? `${currState}${char}` : currState));
-    }
+    if (gameStatus === 'IN_PROGRESS')
+      setCurrentGuess((currState) => (currState.length < WORD_LENGTH ? `${currState}${char}` : currState));
   };
 
   const onDelete = () => {
@@ -48,16 +47,14 @@ const Game: React.FC = () => {
     setCurrentGuess((currState) => currState.slice(0, -1));
   };
 
-  if (gameStatus === 'IN_PROGRESS') {
-    boardState[rowIndex] = currentGuess;
-  }
-
   const boardData = React.useMemo(() => {
+    if (gameStatus !== 'IN_PROGRESS') return boardState;
+
     const boardData = [...boardState];
     boardData[rowIndex] = currentGuess;
 
     return boardData;
-  }, [boardState, currentGuess, rowIndex]);
+  }, [boardState, currentGuess, rowIndex, gameStatus]);
 
   return (
     <main className={cn(styles.game, 'mx-auto flex w-full grow flex-col')}>

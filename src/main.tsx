@@ -4,13 +4,16 @@ import GameProvider from '@/provider/GameProvider.tsx';
 import '@/styles/global.scss';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { ToastProvider } from './provider/ToastProvider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <AppProvider>
-      <GameProvider>
-        <App />
-      </GameProvider>
+      <ToastProvider>
+        <GameProvider>
+          <App />
+        </GameProvider>
+      </ToastProvider>
     </AppProvider>
   </React.StrictMode>,
 );

@@ -1,7 +1,9 @@
+import { GUESS_CHANCES } from '@/constants/settings';
 import WORDS from '@/constants/word-list.json';
 import { guessValidator } from '@/utils/validator';
 import { FixMeLater } from '@/vite-env';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { useToast } from './ToastProvider';
 
 interface GameContextProps {
   boardState: string[];
@@ -23,11 +25,14 @@ export const GameContext = createContext<GameContextProps>({
   enterHandler: () => true,
 });
 
+GameContext.displayName = 'GameContext';
+
 interface GameProviderProps {
   children: React.ReactNode;
 }
 
 const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
+  const { addToast } = useToast();
   const [boardState, setBoardState] = useState(['', '', '', '', '', '']);
   const [evaluations, setEvaluations] = useState<FixMeLater[]>([null, null, null, null, null]);
   const [keyStatus, setKeyStatus] = useState<FixMeLater>({});
@@ -43,41 +48,45 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    let message = '';
+
     if (gameStatus === 'WIN') {
       switch (rowIndex) {
         case 0:
-          alert('Genius');
+          message = 'Genius';
           break;
         case 1:
-          alert('Magnificent');
+          message = 'Magnificent';
           break;
         case 2:
-          alert('Impressive');
+          message = 'Impressive';
           break;
         case 3:
-          alert('Splendid');
+          message = 'Splendid';
           break;
         case 4:
-          alert('Great');
+          message = 'Great';
           break;
         case 5:
-          alert('Phew');
+          message = 'Phew';
           break;
       }
     } else if (gameStatus === 'LOSE') {
-      alert(`${solution.toUpperCase()}`);
+      message = solution.toUpperCase();
     }
-  }, [gameStatus, rowIndex, solution]);
+
+    message && addToast(message, { persist: true });
+  }, [gameStatus, rowIndex, solution, addToast]);
 
   const enterHandler = (guess: string) => {
     // Is game in progress
-    if (gameStatus !== 'IN_PROGRESS') return true;
+    if (gameStatus !== 'IN_PROGRESS') return false;
 
     // Validate
-    const validation = guessValidator(guess, solution.length);
+    const { valid, message } = guessValidator(guess, solution.length);
 
-    if (!validation?.valid) {
-      alert(validation.message);
+    if (!valid) {
+      message && addToast(message);
       return false;
     }
 
@@ -144,11 +153,8 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     setKeyStatus((currState: FixMeLater) => ({ ...currState, ...keyEvaluation }));
 
     // Update row index
-    if (rowIndex === 5) {
-      setGameStatus('LOSE');
-    } else {
-      setRowIndex((currRow) => currRow + 1);
-    }
+    setRowIndex((currRow) => currRow + 1);
+    if (rowIndex === GUESS_CHANCES - 1) setGameStatus('LOSE');
 
     return true;
   };

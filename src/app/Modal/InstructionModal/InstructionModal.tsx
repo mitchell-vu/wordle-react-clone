@@ -14,7 +14,7 @@ const InstructionModal: React.FC = () => {
       onClose={toggleInstructionModal}
       title="How To Play"
       subTitle="Guess the Wordle in 6 tries."
-      className={cn('mt-10 sm:h-auto', { 'min-h-screen-mobile': isIos() })}
+      className={cn('mt-10 h-full self-stretch sm:mt-0 sm:h-auto sm:self-center', { 'min-h-screen-mobile': isIos() })}
     >
       <section className="flex flex-col items-stretch">
         <ul className="mb-4 list-disc pl-4 text-sm">

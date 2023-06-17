@@ -1,6 +1,6 @@
 import { GameContext } from '@/provider/GameProvider';
+import { Backspace } from '@phosphor-icons/react';
 import * as React from 'react';
-import { MdOutlineBackspace } from 'react-icons/md';
 import Key from './Key';
 
 interface KeyboardProps {
@@ -59,7 +59,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onAddChar, onEnter, onDelete }) => 
         })}
         <Key
           letter={'Backspace'}
-          icon={<MdOutlineBackspace size="1.5rem" />}
+          icon={<Backspace weight="bold" size="1.5rem" />}
           onClick={onClick}
           className="one-and-a-half flex-[1.5] text-xs"
         />

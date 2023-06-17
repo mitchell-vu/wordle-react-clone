@@ -1,7 +1,7 @@
 import { useApp } from '@/provider/AppProvider';
+import { ChartBar, Gear, List, Question } from '@phosphor-icons/react';
 import cn from 'classnames';
 import * as React from 'react';
-import { TbChartBar, TbMenu2, TbQuestionCircle, TbSettings } from 'react-icons/tb';
 
 const Header: React.FC = () => {
   const { toggleSettingsModal, toggleInstructionModal, toggleStatisticsModal } = useApp();
@@ -16,7 +16,7 @@ const Header: React.FC = () => {
     >
       <div className="flex flex-row items-center justify-start md:w-1/3">
         <button>
-          <TbMenu2 className="h-6 w-6 sm:h-8 sm:w-8" />
+          <List className="h-6 w-6 sm:h-8 sm:w-8" />
         </button>
       </div>
       <h1
@@ -29,13 +29,13 @@ const Header: React.FC = () => {
       </h1>
       <div className="flex flex-row items-center justify-end gap-2 sm:gap-3 md:w-1/3">
         <button onClick={toggleInstructionModal}>
-          <TbQuestionCircle className="h-6 w-6 sm:h-8 sm:w-8" />
+          <Question className="h-6 w-6 sm:h-8 sm:w-8" />
         </button>
         <button onClick={toggleStatisticsModal}>
-          <TbChartBar className="h-6 w-6 sm:h-8 sm:w-8" />
+          <ChartBar className="h-6 w-6 sm:h-8 sm:w-8" />
         </button>
         <button onClick={toggleSettingsModal}>
-          <TbSettings className="h-6 w-6 sm:h-8 sm:w-8" />
+          <Gear className="h-6 w-6 sm:h-8 sm:w-8" />
         </button>
       </div>
     </header>

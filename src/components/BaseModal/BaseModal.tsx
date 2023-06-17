@@ -1,9 +1,9 @@
 import { useApp } from '@/provider/AppProvider';
 import { isIos } from '@/utils/helpers';
 import { Dialog, Transition } from '@headlessui/react';
+import { X } from '@phosphor-icons/react';
 import cn from 'classnames';
 import * as React from 'react';
-import { HiXMark } from 'react-icons/hi2';
 
 interface BaseModalProps {
   isOpen: boolean;
@@ -16,11 +16,11 @@ interface BaseModalProps {
 
 const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title, subTitle, className }) => {
   const { settings } = useApp();
-  const { darkTheme } = settings;
+  const { darkMode } = settings;
 
   return (
     <Transition appear show={isOpen} as={React.Fragment}>
-      <Dialog as="div" className={cn('relative z-10', { dark: darkTheme, light: !darkTheme })} onClose={onClose}>
+      <Dialog as="div" className={cn('relative z-10', { dark: darkMode, light: !darkMode })} onClose={onClose}>
         <Transition.Child
           as={React.Fragment}
           enter="ease-out duration-100"
@@ -35,7 +35,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
 
         <div className="fixed inset-0 overflow-y-auto">
           <div
-            className={cn('flex items-end justify-center text-center', 'sm:items-center sm:p-4', {
+            className={cn('flex h-full items-end justify-center text-center', 'sm:items-center sm:p-4', {
               'min-h-screen-mobile': isIos(),
               'min-h-screen': !isIos(),
             })}
@@ -50,15 +50,14 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
               leaveTo="opacity-0 translate-y-4"
             >
               <Dialog.Panel
-                as="dialog"
+                as="div"
                 className={cn(
-                  'w-full max-w-lg overflow-hidden rounded-lg rounded-b-none border p-8 text-left align-middle font-franklin',
+                  'max-w-screen max-h-screen w-full overflow-y-auto rounded-lg rounded-b-none border p-8 text-left align-middle font-franklin',
                   'border-neutral-100 bg-white drop-shadow-2xl transition-all',
-                  'sm:rounded-b-lg',
+                  'sm:max-w-lg sm:rounded-b-lg',
                   'dark:border-neutral-800 dark:bg-neutral-950 dark:text-white',
                   className,
                 )}
-                open
               >
                 <Dialog.Title as="header" className="relative mb-4 w-full">
                   {subTitle ? (
@@ -73,7 +72,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
                     onClick={onClose}
                     className="absolute right-0 top-0 text-neutral-700 outline-none dark:text-neutral-200"
                   >
-                    <HiXMark size="1.25rem" />
+                    <X size="1.25rem" />
                   </button>
                 </Dialog.Title>
                 {children}

@@ -20,7 +20,7 @@ const Toast: React.FC<ToastProps> = ({ show, message, className }) => {
       <div
         className={cn(
           'pointer-events-none fixed left-1/2 top-14 z-10 max-w-sm -translate-x-1/2 transform select-none',
-          'line-clamp-1 truncate rounded bg-black px-4 py-3 font-franklin text-sm font-bold text-white',
+          'line-clamp-1 truncate rounded-sm bg-black px-4 py-3 font-franklin text-sm font-bold text-white',
           'dark:bg-white dark:text-black',
           className,
         )}

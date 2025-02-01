@@ -1,7 +1,7 @@
 import { useApp } from '@/provider/AppProvider';
 import cn from 'classnames';
 import React from 'react';
-import styles from './KeyTile.module.scss';
+import styles from './KeyTile.module.css';
 
 interface KeyTileProps {
   letter?: string;
@@ -25,8 +25,8 @@ const KeyTile: React.FC<KeyTileProps> = ({ letter = '', state = 'empty', size })
           'bg-green-500  text-white dark:bg-green-600': state === 'correct',
           'bg-yellow-500  text-white dark:bg-yellow-600': state === 'present',
           'bg-neutral-500  text-white dark:bg-neutral-700': state === 'absent',
-          '!bg-orange-500': colorBlindMode && state === 'correct',
-          '!bg-blue-400': colorBlindMode && state === 'present',
+          'bg-orange-500!': colorBlindMode && state === 'correct',
+          'bg-blue-400!': colorBlindMode && state === 'present',
         },
       )}
       data-letter={letter}

@@ -1,4 +1,4 @@
-import { GameContext } from '@/provider/GameProvider';
+import GameContext from '@/contexts/GameContext';
 import { Backspace } from '@phosphor-icons/react';
 import * as React from 'react';
 import Key from './Key';

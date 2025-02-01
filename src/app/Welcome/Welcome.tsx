@@ -3,7 +3,7 @@ import { useApp } from '@/provider/AppProvider';
 import { isIos } from '@/utils/helpers';
 import { Transition } from '@headlessui/react';
 import cn from 'classnames';
-import moment from 'moment';
+import { format } from 'date-fns';
 import * as React from 'react';
 
 // const SUB_TITLE = 'Go ahead, add another day to your 1 day streak.';
@@ -50,7 +50,7 @@ const Welcome: React.FC = () => {
               </button>
             </div>
 
-            <div className="text-sm font-semibold">{moment().format('MMMM D, YYYY')}</div>
+            <div className="text-sm font-semibold">{format(new Date(), 'MMMM d, yyyy')}</div>
           </div>
         </div>
       </Transition.Child>

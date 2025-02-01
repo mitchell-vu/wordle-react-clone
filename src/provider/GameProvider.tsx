@@ -1,31 +1,10 @@
 import { GUESS_CHANCES } from '@/constants/settings';
 import WORDS from '@/constants/word-list.json';
+import GameContext from '@/contexts/GameContext';
 import { guessValidator } from '@/utils/validator';
 import { FixMeLater } from '@/vite-env';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useToast } from './ToastProvider';
-
-interface GameContextProps {
-  boardState: string[];
-  evaluations: FixMeLater[];
-  keyStatus: FixMeLater;
-  gameStatus: 'IN_PROGRESS' | 'WIN' | 'LOSE';
-  rowIndex: number;
-  solution: string;
-  enterHandler: (guess: string) => boolean;
-}
-
-export const GameContext = createContext<GameContextProps>({
-  boardState: ['', '', '', '', '', ''],
-  evaluations: [''],
-  keyStatus: {},
-  gameStatus: 'IN_PROGRESS',
-  rowIndex: 0,
-  solution: '',
-  enterHandler: () => true,
-});
-
-GameContext.displayName = 'GameContext';
 
 interface GameProviderProps {
   children: React.ReactNode;
@@ -75,7 +54,9 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
       message = solution.toUpperCase();
     }
 
-    message && addToast(message, { persist: true });
+    if (message) {
+      addToast(message, { persist: true });
+    }
   }, [gameStatus, rowIndex, solution, addToast]);
 
   const enterHandler = (guess: string) => {
@@ -86,7 +67,8 @@ const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
     const { valid, message } = guessValidator(guess, solution.length);
 
     if (!valid) {
-      message && addToast(message);
+      if (message) addToast(message);
+
       return false;
     }
 

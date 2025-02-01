@@ -70,7 +70,7 @@ const BaseModal: React.FC<BaseModalProps> = ({ isOpen, onClose, children, title,
                   )}
                   <button
                     onClick={onClose}
-                    className="absolute right-0 top-0 text-neutral-700 outline-none dark:text-neutral-200"
+                    className="absolute right-0 top-0 text-neutral-700 outline-hidden dark:text-neutral-200"
                   >
                     <X size="1.25rem" />
                   </button>

@@ -1,69 +1,56 @@
 {
-  "name": "wordle-react-clone",
-  "version": "0.2.0",
+  "name": "wordle",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:write": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix",
-    "prettier": "prettier --write src/**/*.tsx",
-    "prettier-styles": "prettier --write src/**/*.sass",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --report-unused-disable-directives --fix",
+    "prettier": "prettier --log-level warn --write 'src/**/*.{js,jsx,ts,tsx,json,css,md}'",
     "preview": "vite preview",
-    "postinstall": "husky install"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.tsx": [
-      "npm run lint:write",
-      "npm run lint",
-      "npm run prettier",
-      "git add -A"
-    ],
-    "*.ts": [
-      "npm run lint:write",
-      "npm run lint",
-      "npm run prettier",
-      "git add -A"
-    ]
+    "postinstall": "husky"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.14",
-    "@phosphor-icons/react": "^2.0.10",
-    "classnames": "^2.3.2",
-    "moment": "^2.29.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.2",
-    "usehooks-ts": "^2.9.1"
+    "@headlessui/react": "^2.2.0",
+    "@phosphor-icons/react": "^2.1.7",
+    "@tailwindcss/vite": "^4.0.3",
+    "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.5",
+    "tailwindcss": "^4.0.3",
+    "usehooks-ts": "^3.1.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn lint:fix",
+      "yarn prettier"
+    ]
   },
   "devDependencies": {
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "@vitejs/plugin-react": "^4.0.0",
-    "autoprefixer": "^10.4.14",
-    "eslint": "^8.38.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.2",
-    "postcss": "^8.4.24",
-    "prettier": "^2.8.8",
-    "prettier-plugin-css-order": "^1.3.0",
-    "prettier-plugin-organize-imports": "^3.2.2",
-    "prettier-plugin-tailwindcss": "^0.3.0",
-    "sass": "^1.62.1",
-    "tailwindcss": "^3.3.2",
-    "typescript": "^5.0.2",
-    "vite": "^4.3.9"
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.17.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.16",
+    "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.4.2",
+    "prettier-plugin-css-order": "^2.1.2",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.2",
+    "vite": "^6.0.5"
   }
 }

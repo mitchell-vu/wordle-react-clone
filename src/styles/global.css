@@ -1,0 +1,124 @@
+@import 'tailwindcss';
+
+/* FONT IMPORTS */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap')
+layer(utilities);
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-karnak-condensed: Karnak Condensed Bold, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-karnak: Karnak, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --font-franklin: Libre Franklin, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --color-neutral-50: #f6f7f8;
+  --color-neutral-100: #edeff1;
+  --color-neutral-200: #d3d6da;
+  --color-neutral-300: #d8d8d8;
+  --color-neutral-400: #939598;
+  --color-neutral-500: #787c7e;
+  --color-neutral-600: #565758;
+  --color-neutral-700: #3a3a3c;
+  --color-neutral-800: #272729;
+  --color-neutral-900: #1a1a1b;
+  --color-neutral-950: #121213;
+
+  --color-green-500: #6aaa64;
+  --color-green-600: #538d4e;
+
+  --color-yellow-500: #c9b458;
+  --color-yellow-600: #b59f3b;
+
+  --color-orange-500: #f5793a;
+
+  --color-blue-400: #85c0f9;
+  --color-blue-500: #4f85e5;
+  --color-blue-600: #477aaa;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@utility min-h-screen-mobile {
+  min-height: -webkit-fill-available;
+  min-height: -moz-available;
+  min-height: stretch;
+}
+
+@layer utilities {
+  @font-face {
+    font-weight: 700;
+    src:
+      local('Karnak Condensed Bold'),
+      url(@/assets/fonts/Karnak-Condensed-Bold.woff2) format('woff');
+    font-family: 'Karnak Condensed Bold';
+  }
+
+  @font-face {
+    font-style: normal;
+    font-weight: 400;
+    src:
+      local('Karnak'),
+      url(@/assets/fonts/Karnak-Regular.woff2) format('woff');
+    font-family: 'Karnak';
+  }
+
+  @font-face {
+    font-style: normal;
+    font-weight: 500;
+    src:
+      local('Karnak'),
+      url(@/assets/fonts/Karnak-Medium.woff2) format('woff');
+    font-family: 'Karnak';
+  }
+}
+
+@layer base {
+  :root {
+    --header-height: 50px;
+    --keyboard-height: 200px;
+    --game-max-width: 500px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply m-0 box-border p-0;
+  }
+
+  html,
+  #root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-white dark:bg-neutral-950;
+    min-height: -webkit-fill-available;
+    min-height: -moz-available;
+    min-height: stretch;
+  }
+}

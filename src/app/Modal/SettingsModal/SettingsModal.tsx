@@ -1,5 +1,6 @@
 import { BaseModal, Toggle } from '@/components';
-import { AppSettingsProps, useApp } from '@/provider/AppProvider';
+import { AppSettingsProps } from '@/constants/config';
+import { useApp } from '@/provider/AppProvider';
 import * as React from 'react';
 
 const SETTINGS = [

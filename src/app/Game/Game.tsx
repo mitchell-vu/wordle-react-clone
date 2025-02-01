@@ -2,7 +2,7 @@ import { GUESS_CHANCES, WORD_LENGTH } from '@/constants/settings';
 import { useGame } from '@/provider/GameProvider';
 import cn from 'classnames';
 import * as React from 'react';
-import styles from './Game.module.sass';
+import styles from './Game.module.css';
 import RowTile from './GridTile/RowTile';
 import Keyboard from './Keyboard/Keyboard';
 

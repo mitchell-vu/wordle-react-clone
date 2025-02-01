@@ -1,26 +1,6 @@
-import { ReactNode, createContext, useCallback, useContext, useState } from 'react';
-import { ALERT_TIME_MS } from '../constants/settings';
-
-type ShowOptions = {
-  persist?: boolean;
-  delayMs?: number;
-  durationMs?: number;
-  onClose?: () => void;
-};
-
-interface ToastContextValue {
-  message: string | null;
-  isVisible: boolean;
-  addToast: (message: string, options?: ShowOptions) => void;
-}
-
-export const ToastContext = createContext<ToastContextValue>({
-  message: null,
-  isVisible: false,
-  addToast: () => null,
-});
-
-ToastContext.displayName = 'ToastContext';
+import { ALERT_TIME_MS } from '@/constants/settings';
+import ToastContext, { ShowOptions } from '@/contexts/ToastProvider';
+import { ReactNode, useCallback, useContext, useState } from 'react';
 
 type ToastProviderProps = {
   children?: ReactNode;

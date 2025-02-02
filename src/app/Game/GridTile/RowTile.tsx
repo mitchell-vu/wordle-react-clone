@@ -1,20 +1,21 @@
-import React from 'react';
-import KeyTile from './KeyTile';
+import { KeyTile } from '@/components';
+import { TileState } from '@/contexts/GameContext';
+import React, { useMemo } from 'react';
 
 interface RowTileProps {
   word: string;
-  evaluations?: string[];
+  evaluations: TileState[] | null;
   tileSize?: number;
   isTbd?: boolean;
 }
 
 const RowTile: React.FC<RowTileProps> = ({ word, evaluations, tileSize, isTbd = false }) => {
-  const wordArr = word.split('');
-  const wordFilledArr = [...wordArr];
+  const wordFilledArr = useMemo(() => {
+    const wordArr = word.split('');
 
-  for (let i = wordArr.length; i < 5; i++) {
-    wordFilledArr.push('');
-  }
+    return [...wordArr, ...Array.from({ length: 5 - wordArr.length }).map(() => '')];
+  }, [word]);
+
   return (
     <div className="grid grid-cols-5 gap-1">
       {wordFilledArr.map((letter, index) => (

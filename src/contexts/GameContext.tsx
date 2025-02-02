@@ -1,26 +1,31 @@
-import { FixMeLater } from '@/vite-env';
 import { createContext } from 'react';
 
+export type TileState = 'tbd' | 'correct' | 'present' | 'absent';
+
+export type GameStatus = 'IN_PROGRESS' | 'WIN' | 'LOSE';
+
 interface GameContextProps {
-  boardState: string[];
-  evaluations: FixMeLater[];
-  keyStatus: FixMeLater;
-  gameStatus: 'IN_PROGRESS' | 'WIN' | 'LOSE';
+  boardGuesses: string[];
+  evaluations: (TileState[] | null)[];
+  keyStatus: Record<string, TileState>;
+  gameStatus: GameStatus;
   rowIndex: number;
   solution: string;
-  enterHandler: (guess: string) => boolean;
+
+  validateGuess: (guess: string) => boolean;
+  startNewGame: (newWord: string) => void;
 }
 
 const GameContext = createContext<GameContextProps>({
-  boardState: ['', '', '', '', '', ''],
-  evaluations: [''],
+  boardGuesses: ['', '', '', '', '', ''],
+  evaluations: [null, null, null, null, null],
   keyStatus: {},
   gameStatus: 'IN_PROGRESS',
   rowIndex: 0,
   solution: '',
-  enterHandler: () => true,
-});
 
-GameContext.displayName = 'GameContext';
+  validateGuess: () => true,
+  startNewGame: () => {},
+});
 
 export default GameContext;

@@ -1,5 +1,5 @@
+import { cn } from '@/utils/classnames';
 import { Transition } from '@headlessui/react';
-import cn from 'classnames';
 import * as React from 'react';
 
 type ToastProps = {
@@ -19,8 +19,8 @@ const Toast: React.FC<ToastProps> = ({ show, message, className }) => {
     >
       <div
         className={cn(
-          'pointer-events-none fixed left-1/2 top-14 z-10 max-w-sm -translate-x-1/2 transform select-none',
-          'line-clamp-1 truncate rounded-sm bg-black px-4 py-3 font-franklin text-sm font-bold text-white',
+          'pointer-events-none fixed top-14 left-1/2 z-10 max-w-sm -translate-x-1/2 transform select-none',
+          'font-franklin line-clamp-1 truncate rounded-sm bg-black px-4 py-3 text-sm font-bold text-white',
           'dark:bg-white dark:text-black',
           className,
         )}

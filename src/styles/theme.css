@@ -1,0 +1,39 @@
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-karnak-condensed: Karnak Condensed Bold, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-karnak: Karnak, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+  --font-franklin: Libre Franklin, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --color-neutral-50: #f6f7f8;
+  --color-neutral-100: #edeff1;
+  --color-neutral-200: #d3d6da;
+  --color-neutral-300: #d8d8d8;
+  --color-neutral-400: #939598;
+  --color-neutral-500: #787c7e;
+  --color-neutral-600: #565758;
+  --color-neutral-700: #3a3a3c;
+  --color-neutral-800: #272729;
+  --color-neutral-900: #1a1a1b;
+  --color-neutral-950: #121213;
+
+  --color-green-500: #6aaa64;
+  --color-green-600: #538d4e;
+
+  --color-yellow-500: #c9b458;
+  --color-yellow-600: #b59f3b;
+
+  --color-orange-500: #f5793a;
+
+  --color-blue-400: #85c0f9;
+  --color-blue-500: #4f85e5;
+  --color-blue-600: #477aaa;
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}

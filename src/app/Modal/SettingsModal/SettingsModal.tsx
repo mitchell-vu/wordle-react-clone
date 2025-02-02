@@ -1,6 +1,6 @@
-import { BaseModal, Toggle } from '@/components';
+import { Modal, Toggle } from '@/components';
 import { AppSettingsProps } from '@/constants/config';
-import { useApp } from '@/provider/AppProvider';
+import { useApp } from '@/hooks';
 import * as React from 'react';
 
 const SETTINGS = [
@@ -24,7 +24,7 @@ const SettingsModal: React.FC = () => {
   const { settings, toggleSettings, settingsModalOpen, toggleSettingsModal } = useApp();
 
   return (
-    <BaseModal
+    <Modal
       isOpen={settingsModalOpen}
       onClose={toggleSettingsModal}
       title="Settings"
@@ -51,7 +51,7 @@ const SettingsModal: React.FC = () => {
 
         <div className="py-3 text-xs text-neutral-400">© 2023 Mitchell Vu</div>
       </div>
-    </BaseModal>
+    </Modal>
   );
 };
 

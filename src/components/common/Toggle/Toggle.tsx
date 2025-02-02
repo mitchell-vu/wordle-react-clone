@@ -1,6 +1,6 @@
-import { useApp } from '@/provider/AppProvider';
+import { useApp } from '@/hooks';
+import { cn } from '@/utils/classnames';
 import { Switch } from '@headlessui/react';
-import cn from 'classnames';
 import * as React from 'react';
 
 interface ToggleProps {
@@ -19,7 +19,7 @@ const Toggle: React.FC<ToggleProps> = ({ enabled, setEnabled, name }) => {
       onChange={setEnabled}
       className={cn(
         'relative inline-flex h-5 w-8 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out',
-        'focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+        'focus:outline-hidden focus-visible:ring-2 focus-visible:ring-white/75',
         {
           'bg-neutral-500 dark:bg-neutral-600': !enabled,
           'bg-green-500 dark:bg-green-600': enabled,

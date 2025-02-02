@@ -1,12 +1,12 @@
 .game {
   max-width: var(--game-max-width);
-  height: calc(100% - var(--header-height));
+  max-height: calc(100vh - 210px - var(--header-height));
 }
 
 .board {
-  max-width: 350px;
-  min-width: 150px;
-  max-height: 420px;
-  min-height: 180px;
   box-sizing: border-box;
+  min-width: 150px;
+  max-width: 350px;
+  min-height: 180px;
+  max-height: 420px;
 }

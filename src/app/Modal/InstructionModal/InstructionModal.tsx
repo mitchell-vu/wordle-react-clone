@@ -1,15 +1,14 @@
-import { BaseModal } from '@/components';
-import { useApp } from '@/provider/AppProvider';
+import { KeyTile, Modal } from '@/components';
+import { useApp } from '@/hooks';
+import { cn } from '@/utils/classnames';
 import { isIos } from '@/utils/helpers';
-import cn from 'classnames';
 import * as React from 'react';
-import KeyTile from './KeyTile';
 
 const InstructionModal: React.FC = () => {
   const { instructionModalOpen, toggleInstructionModal } = useApp();
 
   return (
-    <BaseModal
+    <Modal
       isOpen={instructionModalOpen}
       onClose={toggleInstructionModal}
       title="How To Play"
@@ -22,47 +21,55 @@ const InstructionModal: React.FC = () => {
           <li>The color of the tiles will change to show how close your guess was to the word.</li>
         </ul>
 
-        <div>
+        <div className="flex flex-col">
           <p className="font-bold">Examples</p>
-          <div className="mb-5 mt-2">
-            <div className="flex flex-row gap-1">
-              {'Weary'
-                .toUpperCase()
-                .split('')
-                .map((letter, index) => (
-                  <KeyTile key={`${letter}-${index}`} letter={letter} state={index === 0 ? 'correct' : 'tbd'} />
-                ))}
+
+          {[
+            {
+              word: 'wordy',
+              keyLetter: {
+                index: 0,
+                state: 'correct',
+                instruction: 'is in the word and in the correct spot.',
+              },
+            },
+            {
+              word: 'light',
+              keyLetter: {
+                index: 1,
+                state: 'present',
+                instruction: 'is in the word but in the wrong spot.',
+              },
+            },
+            {
+              word: 'rogue',
+              keyLetter: {
+                index: 3,
+                state: 'absent',
+                instruction: 'is not in the word in any spot.',
+              },
+            },
+          ].map(({ word, keyLetter }) => (
+            <div key={word} className="mt-2 mb-5">
+              <div className="flex flex-row gap-1">
+                {word
+                  .toUpperCase()
+                  .split('')
+                  .map((letter, index) => (
+                    <KeyTile
+                      key={`${letter}-${index}`}
+                      letter={letter}
+                      state={index === keyLetter.index ? keyLetter.state : 'tbd'}
+                      size={32}
+                      className="text-2xl"
+                    />
+                  ))}
+              </div>
+              <div className="mt-1">
+                <b className="uppercase">{word[keyLetter.index]}</b> {keyLetter.instruction}
+              </div>
             </div>
-            <div className="mt-1">
-              <b>W</b> is in the word and in the correct spot.
-            </div>
-          </div>
-          <div className="mb-5 mt-2">
-            <div className="flex flex-row gap-1">
-              {'Pills'
-                .toUpperCase()
-                .split('')
-                .map((letter, index) => (
-                  <KeyTile key={`${letter}-${index}`} letter={letter} state={index === 1 ? 'present' : 'tbd'} />
-                ))}
-            </div>
-            <div className="mt-1">
-              <b>U</b> is in the word but in the wrong spot.
-            </div>
-          </div>
-          <div className="mb-5 mt-2">
-            <div className="flex flex-row gap-1">
-              {'Vague'
-                .toUpperCase()
-                .split('')
-                .map((letter, index) => (
-                  <KeyTile key={`${letter}-${index}`} letter={letter} state={index === 3 ? 'absent' : 'tbd'} />
-                ))}
-            </div>
-            <div className="mt-1">
-              <b>I</b> is not in the word in any spot
-            </div>
-          </div>
+          ))}
         </div>
 
         <p>
@@ -78,7 +85,7 @@ const InstructionModal: React.FC = () => {
           for our daily reminder email.
         </p>
       </section>
-    </BaseModal>
+    </Modal>
   );
 };
 

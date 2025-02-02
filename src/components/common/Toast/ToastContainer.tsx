@@ -1,4 +1,4 @@
-import { useToast } from '@/provider/ToastProvider';
+import { useToast } from '@/hooks';
 import React from 'react';
 import Toast from './Toast';
 

@@ -1,16 +1,24 @@
 import { GUESS_CHANCES, WORD_LENGTH } from '@/constants/settings';
-import { useGame } from '@/provider/GameProvider';
-import cn from 'classnames';
+import { useGame } from '@/hooks';
+import { cn } from '@/utils/classnames';
 import * as React from 'react';
 import styles from './Game.module.css';
 import RowTile from './GridTile/RowTile';
 import Keyboard from './Keyboard/Keyboard';
 
 const Game: React.FC = () => {
-  const { boardState, evaluations, rowIndex, gameStatus, enterHandler } = useGame();
-  const [currentGuess, setCurrentGuess] = React.useState('');
+  const { boardGuesses, evaluations, rowIndex, gameStatus, keyStatus, validateGuess } = useGame();
+
+  React.useEffect(() => {
+    console.log('boardGuesses', boardGuesses);
+    console.log('evaluations', evaluations);
+    console.log('keyStatus', keyStatus);
+  }, [evaluations, boardGuesses, keyStatus]);
+
   const boardRef = React.useRef<HTMLDivElement>(null);
+
   const [boardSize, setBoardSize] = React.useState({});
+  const [currentGuess, setCurrentGuess] = React.useState('');
 
   React.useEffect(() => {
     const innerHeight = window.innerHeight;
@@ -34,7 +42,7 @@ const Game: React.FC = () => {
   }, []);
 
   const onEnter = () => {
-    if (enterHandler(currentGuess)) setCurrentGuess('');
+    if (validateGuess(currentGuess)) setCurrentGuess('');
   };
 
   const onAddChar = (char: string) => {
@@ -48,13 +56,13 @@ const Game: React.FC = () => {
   };
 
   const boardData = React.useMemo(() => {
-    if (gameStatus !== 'IN_PROGRESS') return boardState;
+    if (gameStatus !== 'IN_PROGRESS') return boardGuesses;
 
-    const boardData = [...boardState];
+    const boardData = [...boardGuesses];
     boardData[rowIndex] = currentGuess;
 
     return boardData;
-  }, [boardState, currentGuess, rowIndex, gameStatus]);
+  }, [boardGuesses, currentGuess, rowIndex, gameStatus]);
 
   return (
     <main className={cn(styles.game, 'mx-auto flex w-full grow flex-col')}>

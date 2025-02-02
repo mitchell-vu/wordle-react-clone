@@ -1,7 +1,7 @@
-import { BaseModal } from '@/components';
-import { useApp } from '@/provider/AppProvider';
+import { Button, Modal } from '@/components';
+import { useApp } from '@/hooks';
+import { cn } from '@/utils/classnames';
 import { ShareNetwork } from '@phosphor-icons/react';
-import cn from 'classnames';
 import * as React from 'react';
 
 const StatisticsModal: React.FC = () => {
@@ -20,7 +20,7 @@ const StatisticsModal: React.FC = () => {
   }, []);
 
   return (
-    <BaseModal
+    <Modal
       isOpen={statisticsModalOpen}
       onClose={toggleStatisticsModal}
       title="Statistics"
@@ -47,7 +47,7 @@ const StatisticsModal: React.FC = () => {
         </section>
 
         <section className="mt-8">
-          <h3 className="mb-3 text-center font-karnak-condensed text-2xl">Guess Distribution</h3>
+          <h3 className="font-karnak-condensed mb-3 text-center text-2xl">Guess Distribution</h3>
           <div className="mx-auto flex flex-col gap-1 text-xs font-bold">
             {gameStats.map(({ guess, count, width }) => (
               <div key={guess} className="flex h-5 w-full flex-row items-center gap-1">
@@ -67,16 +67,10 @@ const StatisticsModal: React.FC = () => {
         </section>
       </div>
 
-      <button
-        className={cn(
-          'mt-6 flex h-9 w-36 shrink-0 flex-row items-center justify-center gap-2',
-          'rounded-full bg-green-500 font-franklin font-bold dark:bg-green-600',
-        )}
-        onClick={handleShareClick}
-      >
-        Share <ShareNetwork size="1.25rem" />
-      </button>
-    </BaseModal>
+      <Button className="mt-6" onClick={handleShareClick} endIcon={<ShareNetwork size="1.25rem" />}>
+        Share
+      </Button>
+    </Modal>
   );
 };
 

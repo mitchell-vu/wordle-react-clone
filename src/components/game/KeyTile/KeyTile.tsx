@@ -1,21 +1,34 @@
 import { useApp } from '@/hooks';
 import { cn } from '@/utils/classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './KeyTile.module.css';
 
-interface KeyTileProps {
+interface KeyTileProps extends React.HTMLAttributes<HTMLDivElement> {
   letter?: string;
   state?: string;
   size?: number;
-  className?: string;
 }
 
-const KeyTile: React.FC<KeyTileProps> = ({ letter = '', state = 'empty', size, className }) => {
+const KeyTile: React.FC<KeyTileProps> = ({ letter = '', state = 'empty', size, className, style, ...others }) => {
   const { settings } = useApp();
   const { colorBlindMode } = settings;
 
+  const [animation, setAnimation] = useState('idle');
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (state === 'tbd') {
+      setAnimation('pop');
+      timer = setTimeout(() => setAnimation('idle'), 250);
+    }
+
+    return () => clearTimeout(timer);
+  }, [state]);
+
   return (
     <div
+      {...others}
       className={cn(
         styles.tile,
         'font-franklin inline-flex items-center justify-center align-middle text-4xl font-bold uppercase select-none',
@@ -35,7 +48,8 @@ const KeyTile: React.FC<KeyTileProps> = ({ letter = '', state = 'empty', size, c
       )}
       data-letter={letter}
       data-state={state}
-      style={{ width: size, height: size }}
+      data-animation={animation}
+      style={{ ...style, width: size, height: size }}
     >
       {letter}
     </div>

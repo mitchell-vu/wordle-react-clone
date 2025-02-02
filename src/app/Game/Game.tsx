@@ -7,17 +7,14 @@ import RowTile from './GridTile/RowTile';
 import Keyboard from './Keyboard/Keyboard';
 
 const Game: React.FC = () => {
-  const { boardGuesses, evaluations, rowIndex, gameStatus, keyStatus, validateGuess } = useGame();
-
-  React.useEffect(() => {
-    console.log('boardGuesses', boardGuesses);
-    console.log('evaluations', evaluations);
-    console.log('keyStatus', keyStatus);
-  }, [evaluations, boardGuesses, keyStatus]);
+  const { boardGuesses, evaluations, rowIndex, gameStatus, validateGuess } = useGame();
 
   const boardRef = React.useRef<HTMLDivElement>(null);
 
-  const [boardSize, setBoardSize] = React.useState({});
+  const [boardSize, setBoardSize] = React.useState<{ width: number; height: number }>({
+    width: 0,
+    height: 0,
+  });
   const [currentGuess, setCurrentGuess] = React.useState('');
 
   React.useEffect(() => {
